@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+ActiveRecord::Migration.say_with_time('Creating Articles') do
+  20.times do
+    FactoryBot.create(:post)
+  end
+end
