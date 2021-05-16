@@ -9,10 +9,20 @@ module Arel
     end
   end
 
+  class Nodes::ContainsString < Arel::Nodes::Binary
+    def operator
+      :"@>"
+    end
+  end
+
   class Visitors::PostgreSQL
     private
 
     def visit_Arel_Nodes_ContainsArray(o, collector)
+      infix_value o, collector, ' @> '
+    end
+
+    def visit_Arel_Nodes_ContainsString(o, collector)
       infix_value o, collector, ' @> '
     end
   end
@@ -20,6 +30,10 @@ module Arel
   module Predications
     def contains(other)
       Nodes::ContainsArray.new self, Nodes.build_quoted(other, self)
+    end
+
+    def contains_string(other)
+      Nodes::ContainsString.new self, Nodes.build_quoted(other, self)
     end
   end
 end

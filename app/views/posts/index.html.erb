@@ -7,9 +7,9 @@
   <%= f.search_field :title_cont %>
   <%= f.label :category_cont %>
   <%= f.search_field :category_contains %>
-  <% [1,2,3,4].each do |value| %>
+  <% [1,2,3,4,5].each do |value| %>
     <li>
-      <%= f.check_box :category_contains, {:multiple => true}, value, nil %>
+      <%= f.check_box :category_contains_string, {:multiple => true}, value, nil %>
       <%= h value -%>
     </li>
   <% end %>
